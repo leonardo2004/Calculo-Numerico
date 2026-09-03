@@ -1,0 +1,6 @@
+			df.apply(np.sum)           # aplica soma em cada coluna
+			df.apply(lambda x: x.max() - x.min(), axis=1)  # amplitude por linha
+			df['col'].apply(lambda x: x**2)  # aplica na coluna
+			
+			Remover duplicadas:
+			df.drop_duplicates(subset=['nome'], keep='first')

@@ -1,0 +1,487 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=0.6cm, top=0.8cm, bottom=0.6cm}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+% ============================================================
+% FONTE MONOESPACADA PARA TODO O DOCUMENTO
+% ============================================================
+\usepackage{inconsolata}
+\renewcommand{\familydefault}{\ttdefault}
+
+% ============================================================
+% CORES PARA SYNTAX HIGHLIGHTING
+% ============================================================
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0.25,0.5,0.75}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.94}
+
+% ============================================================
+% CONFIGURAÇÃO DO LSTLISTING
+% ============================================================
+\lstset{
+	language=Python,
+	basicstyle=\scriptsize\ttfamily,
+	numbers=left,
+	numberstyle=\tiny\color{codegray},
+	stepnumber=1,
+	numbersep=4pt,
+	backgroundcolor=\color{backcolour},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2,
+	breaklines=true,
+	breakatwhitespace=true,
+	columns=fullflexible,
+	keepspaces=true,
+	keywordstyle=\color{codeblue},
+	commentstyle=\color{codegreen},
+	stringstyle=\color{codepurple},
+	frame=none,
+	extendedchars=true,
+	inputencoding=utf8,
+}
+
+\pagestyle{empty}
+\setlength{\columnsep}{0.4cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.1cm}
+
+\begin{document}
+	
+	% ============================================================
+	% CABEÇALHO: NOME+RA À ESQUERDA, TÍTULO CENTRO, LOGO À DIREITA
+	% ============================================================
+	\noindent
+	\begin{minipage}[t]{0.30\textwidth}
+		\raggedright
+		{\bfseries Leonardo Tomasela Leal}\\
+		RA: 170291
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.40\textwidth}
+		\centering
+		{\Large\bfseries Tabela de resumo de Python}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.25\textwidth}
+		\raggedleft
+		\includegraphics[width=2.8cm]{Unifesp_completa_policromia_RGB.png}
+	\end{minipage}
+	
+	\vspace{0.2cm}
+	\hrule
+	\vspace{0.2cm}
+	
+	% ============================================================
+	% INÍCIO DAS DUAS COLUNAS
+	% ============================================================
+	\begin{multicols}{2}
+		
+		% ============================================================
+		% 1. TIPOS & VARIÁVEIS
+		% ============================================================
+		\noindent\textbf{1. TIPOS E VARIÁVEIS} \\
+		Conversão entre tipos e verificação de tipo.
+		\begin{lstlisting}
+			int("10"), float("3.14"), str(123), bool(0)
+			type(var), isinstance(var, int)
+		\end{lstlisting}
+		
+		% ============================================================
+		% 2. STRINGS (imutáveis)
+		% ============================================================
+		\noindent\textbf{2. STRINGS (imutáveis)} \\
+		Fatiamento, métodos comuns e formatação.
+		\begin{lstlisting}
+			s = "python"
+			s[0:3], s[::-1], s[::2]          # fatias
+			s.upper(), s.lower(), s.strip()   # maiusculo/minusculo/remover espacos
+			s.split(","), ",".join(lista)    # dividir e unir
+			s.replace("py","Java")            # substituir
+			s.find("t")                       # indice (ou -1 se nao achar)
+			s.count("p")                      # conta ocorrencias
+			s.isdigit(), s.isalpha()          # verifica se e' numero/letra
+			s.startswith("p"), "x" in s       # verificacoes
+			f"Idade: {idade}"                 # f-string (mais comum)
+		\end{lstlisting}
+		
+		% ============================================================
+		% 3. LISTAS (mutáveis)
+		% ============================================================
+		\noindent\textbf{3. LISTAS (mutáveis)} \\
+		Acesso, métodos e compreensão de listas.
+		\begin{lstlisting}
+			l = [1, 2, 3, 4]
+			l[0], l[-1], l[1:3]               # acesso e fatia
+			l.append(5), l.insert(0,0)        # adicionar no fim/posicao
+			l.pop(), l.pop(1), l.remove(2)    # remover (ultimo, posicao, valor)
+			l.index(3)                        # posicao do primeiro 3
+			l.sort(), l.reverse()             # ordenar e inverter
+			l.extend([5,6])                   # concatenar outra lista
+			l.clear(), l.copy()               # esvaziar e copiar
+			[x**2 for x in range(10) if x%2==0]  # compreensao com filtro
+		\end{lstlisting}
+		
+		% ============================================================
+		% 4. TUPLAS (imutáveis)
+		% ============================================================
+		\noindent\textbf{4. TUPLAS (imutáveis)} \\
+		Criação e desempacotamento.
+		\begin{lstlisting}
+			t = (1, 2, 3)  # ou t = 1,2,3
+			a, b = (1, 2)
+			a, *resto = (1,2,3,4)            # *resto pega o restante
+		\end{lstlisting}
+		
+		% ============================================================
+		% 5. DICIONÁRIOS (dict)
+		% ============================================================
+		\noindent\textbf{5. DICIONÁRIOS (dict)} \\
+		Acesso seguro, iteração, compreensão.
+		\begin{lstlisting}
+			d = {"nome": "Ana", "idade": 30}
+			d["nome"], d.get("sexo", "F")     # get evita erro se chave nao existe
+			d["peso"] = 65                     # adicionar nova chave
+			d.pop("idade")                    # remove chave e retorna valor
+			d.popitem()                       # remove e retorna ultimo par
+			d.update({"sexo":"F"})            # atualiza com outro dict
+			for k, v in d.items(): print(k,v) # iterar
+			d.keys(), d.values()              # listar chaves/valores
+			{x: x**2 for x in range(3)}       # compreensao: {0:0, 1:1, 2:4}
+		\end{lstlisting}
+		
+		% ============================================================
+		% 6. CONJUNTOS (set)
+		% ============================================================
+		\noindent\textbf{6. CONJUNTOS (set)} \\
+		Operações de conjunto.
+		\begin{lstlisting}
+			s = {1, 2, 3, 3}  # -> {1,2,3} (remove duplicatas)
+			s.add(4), s.discard(2), s.remove(2)  # adicionar/remover
+			s.update({5,6})                    # adicionar varios
+			s.intersection_update({1,2})       # mantem apenas a interseccao
+			# uniao(|), interseccao(&), diferenca(-), xor(^)
+		\end{lstlisting}
+		
+		% ============================================================
+		% 7. CONDICIONAIS
+		% ============================================================
+		\noindent\textbf{7. CONDICIONAIS} \\
+		Estrutura if/elif/else e operador ternário.
+		\begin{lstlisting}
+			if x > 0:
+			print("Positivo")
+			elif x == 0:
+			print("Zero")
+			else:
+			print("Negativo")
+			resultado = "Par" if num % 2 == 0 else "Impar"
+		\end{lstlisting}
+		
+		% ============================================================
+		% 8. LAÇOS
+		% ============================================================
+		
+		
+		\columnbreak
+		\noindent\textbf{8. LAÇOS (LOOPS)} \\
+		For, while, enumerate, break/continue.
+		\begin{lstlisting}
+			for i in range(5):                 # 0 a 4
+			for i in range(2, 10, 2):          # 2,4,6,8
+			for idx, val in enumerate(lista):  # com indice
+			while condicao:                    # loop condicional
+			...
+			break, continue, else (no loop)    # controle de fluxo
+		\end{lstlisting}
+		
+		% ============================================================
+		% 9. FUNÇÕES
+		% ============================================================
+		\noindent\textbf{9. FUNÇÕES} \\
+		Definição, argumentos, lambda.
+		\begin{lstlisting}
+			def soma(a, b=1):                  # b e opcional
+			return a + b
+			
+			def varios(*args, **kwargs):       # *args = tupla, **kwargs = dict
+			print(args, kwargs)
+			
+			f = lambda x: x*2                  # funcao anonima
+		\end{lstlisting}
+		
+		% ============================================================
+		% 10. COMPREENSÕES E GERADORES
+		% ============================================================
+		\noindent\textbf{10. COMPREENSÕES E GERADORES} \\
+		Lista, dict, set e geradores (economizam memória).
+		\begin{lstlisting}
+			[x for x in range(5)]              # lista
+			{x: x*2 for x in range(3)}         # dicionario
+			{x for x in "abacaxi"}             # conjunto (remove duplicatas)
+			(x for x in range(10))             # gerador (lazy) -> next(g)
+			# Compreensao aninhada:
+			[(x,y) for x in range(2) for y in range(2)]
+		\end{lstlisting}
+		
+		% ============================================================
+		% 11. ENTRADA/SAÍDA E ARQUIVOS
+		% ============================================================
+		\noindent\textbf{11. ENTRADA / SAÍDA / ARQUIVOS}
+		\begin{lstlisting}
+			nome = input("Digite: ")            # entrada do usuario (sempre str)
+			print(f"Ola {nome}", end="\n")      # saida com f-string
+			
+			# Leitura de arquivo
+			with open("arquivo.txt", "r", encoding="utf-8") as f:
+			conteudo = f.read()             # le tudo
+			linha = f.readline()            # le uma linha
+			linhas = f.readlines()          # le todas as linhas
+			
+			# Escrita (sobrescreve)
+			with open("out.txt", "w") as f:
+			f.write("texto")
+			
+			# Append (adiciona ao final)
+			with open("out.txt", "a") as f:
+			f.write("mais texto")
+		\end{lstlisting}
+		
+		% ============================================================
+		% 12. TRATAMENTO DE ERROS
+		% ============================================================
+		\noindent\textbf{12. EXCEPTIONS} \\
+		Captura de erros.
+		\begin{lstlisting}
+			try:
+			x = int(input("Numero: "))
+			except ValueError as e:             # erro especifico
+			print(f"Erro: {e}")
+			except ZeroDivisionError:
+			print("Divisao por zero!")
+			else:                               # executa se nao houver erro
+			print("Sem erros")
+			finally:                            # sempre executa
+			print("Sempre executa")
+		\end{lstlisting}
+		
+		% ============================================================
+		% 13. OPERADORES E BUILT-INS
+		% ============================================================
+		\noindent\textbf{13. OPERADORES E BUILT-INS} \\
+		Operadores lógicos e funções nativas.
+		\begin{lstlisting}
+			# Operadores
+			is, is not, and, or, not, in, not in
+			if (n := len(lista)) > 5: ...      # walrus (atribui e compara)
+			
+			# Funcoes built-in (nativas)
+			len(), sum(), max(), min(), sorted()
+			list(zip([1,2], ['a','b']))        # combina listas
+			all(lista), any(lista)             # todos True / algum True
+			map(func, iteravel)                # aplica funcao a cada elemento
+			filter(func, iteravel)             # filtra elementos
+		\end{lstlisting}
+		
+		% ============================================================
+		% ================ NUMPY (expandido) ===========================
+		% ============================================================
+		
+		\columnbreak
+		\vspace{0.2cm}
+		{\large\bfseries NUMPY}
+		
+		\noindent\textbf{Criação de arrays} \\
+		Diferentes formas de criar arrays NumPy.
+		\begin{lstlisting}
+			import numpy as np
+			np.array([1, 2, 3])                # array 1D
+			np.array([[1,2], [3,4]])           # array 2D (matriz)
+			np.zeros((2,3))                    # tudo 0
+			np.ones((3,2))                     # tudo 1
+			np.eye(3)                          # matriz identidade 3x3
+			np.arange(0, 10, 2)               # sequencia [0,2,4,6,8]
+			np.linspace(0, 1, 5)              # 5 pontos entre 0 e 1
+			np.random.randn(3,4)              # normal (media 0, var 1)
+			np.random.randint(0, 10, size=5)  # inteiros aleatorios
+		\end{lstlisting}
+		
+		\noindent\textbf{Atributos e forma} \\
+		Propriedades do array.
+		\begin{lstlisting}
+			arr.shape                          # (linhas, colunas)
+			arr.ndim                           # numero de dimensoes
+			arr.size                           # total de elementos
+			arr.dtype                          # tipo (int64, float64, etc)
+			arr.reshape(2,3)                  # redimensiona (total igual)
+			arr.T                              # transposta
+		\end{lstlisting}
+		
+		\noindent\textbf{Indexação e fatia} \\
+		Acesso a elementos e subconjuntos.
+		\begin{lstlisting}
+			arr[0, 1]                          # linha 0, coluna 1
+			arr[:, 1]                          # todas linhas, coluna 1
+			arr[1, :]                          # linha 1, todas colunas
+			arr[1::2, :]                       # linhas impares
+			arr[arr > 0.5]                    # filtro booleano (retorna 1D)
+			arr[(arr > 0) & (arr < 1)]        # condicoes combinadas (use &, |, ~)
+			# Indexacao com listas: arr[[0,2], [1,3]]
+		\end{lstlisting}
+		
+		\noindent\textbf{Operações e manipulação} \\
+		Operações matemáticas e manipulação de arrays.
+		\begin{lstlisting}
+			arr + 1, arr * 2, arr ** 2        # operacoes elemento a elemento
+			np.sqrt(arr), np.exp(arr), np.log(arr)
+			
+			# Estatisticas
+			arr.sum(), arr.mean(), arr.std()
+			arr.sum(axis=0)                   # soma cada coluna (reduz dimensao)
+			arr.mean(axis=1)                  # media cada linha
+			
+			A @ B                             # multiplicacao de matrizes
+			
+			# Broadcasting: arr 2x3 + vetor 1x3 -> vetor replicado para cada linha
+			# arr 2x3 + escalar -> escalar aplicado a todos
+			
+			# Manipulacao
+			np.concatenate([arr1, arr2], axis=0)  # empilha vertical
+			np.vstack([a,b]), np.hstack([a,b])    # vertical/horizontal
+			np.where(cond, x, y)              # condicional elemento a elemento
+			np.where(arr > 0, arr, 0)         # exemplo: zera valores negativos
+			np.unique(arr)                    # valores unicos
+			
+			# CUIDADO: view vs copy
+			view = arr[:]                     # visao (altera o original!)
+			copia = arr.copy()                # copia real (segura)
+		\end{lstlisting}
+		
+		% ============================================================
+		% ================ PANDAS (expandido) =========================
+		% ============================================================
+		\vspace{0.2cm}
+		{\large\bfseries PANDAS}
+		
+		\noindent\textbf{Estruturas e I/O} \\
+		Series (1D), DataFrame (2D), leitura/escrita.
+		\begin{lstlisting}
+			import pandas as pd
+			s = pd.Series([1,2,3], index=['a','b','c'])
+			df = pd.DataFrame({
+				'nome': ['Ana','Bob'],
+				'idade': [25, 30]
+			})
+			
+			# Leitura / escrita
+			df = pd.read_csv('arquivo.csv', sep=',', encoding='utf-8')
+			df = pd.read_excel('planilha.xlsx', sheet_name='Sheet1')
+			df.to_csv('saida.csv', index=False)      # index=False remove a coluna de indice
+			df.to_excel('saida.xlsx', index=False)
+		\end{lstlisting}
+		
+		\noindent\textbf{Inspeção e seleção} \\
+		Visualizar dados e selecionar colunas/linhas.
+		\begin{lstlisting}
+			df.head(3), df.tail(2)            # primeiras/ultimas linhas
+			df.info()                         # tipos e nulos
+			df.describe()                     # estatisticas (numericas)
+			df.shape, df.columns, df.index    # informacoes estruturais
+			
+			# Selecao
+			df['nome']                        # Serie (uma coluna)
+			df[['nome', 'idade']]             # DataFrame (varias colunas)
+			df.loc[0]                         # linha por indice (rotulo)
+			df.loc[0:2, 'nome']               # linhas 0-2, coluna 'nome'
+			df.iloc[0]                        # linha por posicao (0 = primeira)
+			df.iloc[0:3, 0:2]                 # linhas 0-2, colunas 0-1
+			
+			# Filtros condicionais
+			df[df['idade'] > 20]              # condicional
+			df.query("idade > 20")            # filtro com string (alternativa)
+			df['idade'].isin([20, 30])        # pertence a lista
+			df[df['nome'].str.startswith('A')]  # filtro com string metodo
+		\end{lstlisting}
+		
+		\noindent\textbf{Tratamento de nulos e duplicados} \\
+		Valores ausentes (NaN) e registros duplicados.
+		\begin{lstlisting}
+			# Nulos
+			df.isnull().sum()                 # conta nulos por coluna
+			df.dropna(axis=0)                 # remove linhas com qualquer NaN
+			df.dropna(subset=['idade'])      # remove se NaN na coluna 'idade'
+			df.fillna(0)                      # preenche todos com 0
+			df['col'].fillna(df['col'].mean())  # preenche com a media da coluna
+			df.fillna(method='ffill')        # preenche com valor anterior
+			
+			# Duplicados
+			df.duplicated()                   # True nas linhas duplicadas
+			df.drop_duplicates(subset=['nome'], keep='first')
+		\end{lstlisting}
+		
+		\noindent\textbf{Criação, ordenação e strings} \\
+		Manipulação de colunas e dados de texto.
+		\begin{lstlisting}
+			df['nova_col'] = df['idade'] * 2   # nova coluna baseada em outra
+			df['categoria'] = df['idade'].apply(lambda x: 'Maior' if x>=18 else 'Menor')
+			df['sexo_cod'] = df['sexo'].map({'M':1, 'F':0})  # mapeamento
+			df.rename(columns={'nome':'Nome_Completo'}, inplace=True)
+			df.sort_values(by='idade', ascending=False)
+			
+			# Operacoes com strings
+			df['nome'].str.upper()            # tudo maiusculo
+			df['nome'].str.contains('An')    # contem 'An'?
+			df['nome'].str.len()              # tamanho da string
+			df['nome'].str.extract(r'(\d+)') # extrai numeros com regex
+		\end{lstlisting}
+		
+		\noindent\textbf{Groupby, Merge, Pivot, Datetime} \\
+		Agrupamento, junções, tabelas dinâmicas, datas.
+		\begin{lstlisting}
+			# Groupby (agrupamento)
+			df.groupby('categoria')['idade'].mean()   # media por categoria
+			df.groupby('categoria')[['idade','peso']].agg(['mean', 'sum'])
+			df.groupby(['categoria', 'sexo']).size()  # contagem por dois niveis
+			df.groupby('categoria').agg(
+			media_idade=('idade', 'mean'),
+			max_peso=('peso', 'max')
+			)  # agregacao nomeada
+			df.groupby('categoria')['idade'].transform('mean')  # broadcasting
+			
+			# Merge (juncao) - tipos: inner, left, right, outer, cross
+			pd.merge(df1, df2, on='chave', how='inner')
+			pd.merge(df1, df2, left_on='col1', right_on='col2')
+			
+			# Concat (empilhamento)
+			pd.concat([df1, df2], axis=0)     # empilha linhas (vertical)
+			pd.concat([df1, df3], axis=1)     # empilha colunas (horizontal)
+			
+			# Pivot Table (tabela dinamica) - mais flexivel que pivot()
+			pd.pivot_table(df, values='vendas', index='cidade', columns='ano', 
+			aggfunc='sum', fill_value=0)
+			df.pivot(index='cidade', columns='ano', values='vendas')  # alternativa
+			
+			# Datetime (datas)
+			df['data'] = pd.to_datetime(df['data'])  # converte para datetime
+			df['ano'] = df['data'].dt.year
+			df['mes'] = df['data'].dt.month
+			df['dia_semana'] = df['data'].dt.day_name()
+			df['semana_ano'] = df['data'].dt.isocalendar().week
+		\end{lstlisting}
+		
+		% ============================================================
+		% DICA FINAL
+		% ============================================================
+		
+	\end{multicols}
+\end{document}
